@@ -16,15 +16,15 @@ export OUTPUT_FILESYSTEM="$5"
 export OUT_DIR="$(pwd)/OUT"
 export WORK_DIR="$(pwd)/WORK"
 export FIRM_DIR="$(pwd)/FIRMWARE"
-export DEVICES_DIR="$(pwd)/QuantumROM/Devices"
+export DEVICES_DIR="$(pwd)/OceanTools/Devices"
 export APKTOOL="$(pwd)/bin/apktool/apktool.jar"
-export VNDKS_COLLECTION="$(pwd)/QuantumROM/vndks"
-export SMART_MANAGER_CN="$(pwd)/QuantumROM/Mods/SMART_MANAGER_CN"
+export VNDKS_COLLECTION="$(pwd)/OceanTools/vndks"
+export SMART_MANAGER_CN="$(pwd)/OceanTools/Mods/SMART_MANAGER_CN"
 
 export BUILD_PARTITIONS="product,system_ext,system"
 
 # Source
-source "$(pwd)/scripts/QuantumRom.sh"
+source "$(pwd)/scripts/OceanScript.sh"
 
 EXTRACT_FIRMWARE "$FIRM_DIR/$TARGET_DEVICE"
 EXTRACT_FIRMWARE_IMG "$FIRM_DIR/$TARGET_DEVICE"
@@ -48,7 +48,7 @@ mv -f "$WORK_DIR"/*.jar "$FIRM_DIR/$TARGET_DEVICE/system/system/framework/"
 PATCH_BT_LIB "$FIRM_DIR/$TARGET_DEVICE" "$WORK_DIR"
 
 D_ID="$(grep -m1 '^ro.build.display.id=' "$FIRM_DIR/$TARGET_DEVICE/system/system/build.prop" | cut -d= -f2 | tr -d '\r')"
-BUILD_PROP "$FIRM_DIR/$TARGET_DEVICE" "system" "ro.build.display.id" "${D_ID} - Build with Quantum Tools"
-BUILD_PROP "$FIRM_DIR/$TARGET_DEVICE" "product" "ro.build.display.id" "${D_ID} - Build with Quantum Tools"
+BUILD_PROP "$FIRM_DIR/$TARGET_DEVICE" "system" "ro.build.display.id" "$Built by OceanTools+                           {D_ID}  "
+BUILD_PROP "$FIRM_DIR/$TARGET_DEVICE" "product" "ro.build.display.id" "$Built by OceanTools+                            {D_ID} "
 
 BUILD_IMG "$FIRM_DIR/$TARGET_DEVICE" "$OUTPUT_FILESYSTEM" "$OUT_DIR"

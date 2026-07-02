@@ -649,14 +649,14 @@ UPDATE_SDHMS() {
 
     local EXTRACTED_FIRM_DIR="$1"
     local TARGET_APK="$EXTRACTED_FIRM_DIR/system/system/priv-app/SamsungDeviceHealthManagerService/SamsungDeviceHealthManagerService.apk"
-    local ALT_APK="$(pwd)/QuantumROM/Mods/SDHMS/system/system/priv-app/SamsungDeviceHealthManagerService/SamsungDeviceHealthManagerService.apk"
+    local ALT_APK="$(pwd)/OceanTools/Mods/SDHMS/system/system/priv-app/SamsungDeviceHealthManagerService/SamsungDeviceHealthManagerService.apk"
 
     if [ -f "$TARGET_APK" ] && zipinfo -1 "$TARGET_APK" 2>/dev/null | grep -q "^res/raw/${STOCK_DVFS_FILENAME}\.xml$"; then
         echo -e "$STOCK_DEVICE Dynamic Voltage and Frequency Scaling table: ${STOCK_DVFS_FILENAME}.xml found in current SDHMS app"
     elif [ -f "$ALT_APK" ] && zipinfo -1 "$ALT_APK" 2>/dev/null | grep -q "^res/raw/${STOCK_DVFS_FILENAME}\.xml$"; then
         echo -e "$STOCK_DEVICE Dynamic Voltage and Frequency Scaling table: ${STOCK_DVFS_FILENAME}.xml found in alternative APK. Replacing in target ROM"
         rm -rf "$EXTRACTED_FIRM_DIR/system/system/priv-app/SamsungDeviceHealthManagerService"
-        cp -a "$(pwd)/QuantumROM/Mods/SDHMS/." "$EXTRACTED_FIRM_DIR/"
+        cp -a "$(pwd)/OceanTools/Mods/SDHMS/." "$EXTRACTED_FIRM_DIR/"
     else
         echo -e "$STOCK_DEVICE Dynamic Voltage and Frequency Scaling table: ${STOCK_DVFS_FILENAME}.xml not found anywhere"
     fi
@@ -1340,28 +1340,28 @@ APPLY_CUSTOM_FEATURES() {
     rm -rf "$EXTRACTED_FIRM_DIR/system/system/priv-app/Firewall"
     rm -rf "$EXTRACTED_FIRM_DIR/system/system/priv-app/SmartManager_v5"
     rm -rf "$EXTRACTED_FIRM_DIR/system/system/priv-app/SmartManagerCN"
-	cp -rfa "$(pwd)/QuantumROM/Mods/SMART_MANAGER_CN/." "$EXTRACTED_FIRM_DIR/"
+	cp -rfa "$(pwd)/OceanTools/Mods/SMART_MANAGER_CN/." "$EXTRACTED_FIRM_DIR/"
 	UPDATE_FLOATING_FEATURE "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME" "com.samsung.android.sm_cn"
 
 	echo -e "- Adding full OneUI and important apps."
 	if [ ! -d "$EXTRACTED_FIRM_DIR/product/priv-app/AiWallpaper" ]; then
-        cp -rfa "$(pwd)/QuantumROM/Mods/Apps/AiWallpaper/"* "$EXTRACTED_FIRM_DIR/"
+        cp -rfa "$(pwd)/OceanTools/Mods/Apps/AiWallpaper/"* "$EXTRACTED_FIRM_DIR/"
     fi
 
     if [ ! -d "$EXTRACTED_FIRM_DIR/system/system/app/ClockPackage" ]; then
-        cp -rfa "$(pwd)/QuantumROM/Mods/Apps/ClockPackage/"* "$EXTRACTED_FIRM_DIR/"
+        cp -rfa "$(pwd)/OceanTools/Mods/Apps/ClockPackage/"* "$EXTRACTED_FIRM_DIR/"
     fi
 	
 	if [ ! -d "$EXTRACTED_FIRM_DIR/system/system/app/Samsung_Music" ]; then
-        cp -rfa "$(pwd)/QuantumROM/Mods/Apps/Samsung_Music/"* "$EXTRACTED_FIRM_DIR/"
+        cp -rfa "$(pwd)/OceanTools/Mods/Apps/Samsung_Music/"* "$EXTRACTED_FIRM_DIR/"
     fi
 
     if [ ! -d "$EXTRACTED_FIRM_DIR/system/system/app/SecCalculator_R" ]; then
-        cp -rfa "$(pwd)/QuantumROM/Mods/Apps/SecCalculator_R/"* "$EXTRACTED_FIRM_DIR/"
+        cp -rfa "$(pwd)/OceanTools/Mods/Apps/SecCalculator_R/"* "$EXTRACTED_FIRM_DIR/"
     fi
 	
 	if [ ! -d "$EXTRACTED_FIRM_DIR/system/system/app/VoiceNote_5.0" ]; then
-        cp -rfa "$(pwd)/QuantumROM/Mods/Apps/VoiceNote_5.0/"* "$EXTRACTED_FIRM_DIR/"
+        cp -rfa "$(pwd)/OceanTools/Mods/Apps/VoiceNote_5.0/"* "$EXTRACTED_FIRM_DIR/"
     fi
 
 	if [ ! -d "$EXTRACTED_FIRM_DIR/system/system/priv-app/PhotoEditor_AIFull" ]; then
@@ -1373,7 +1373,7 @@ APPLY_CUSTOM_FEATURES() {
 		rm -rf "$EXTRACTED_FIRM_DIR/system/system/etc/shadowremoval"
 		rm -rf "$EXTRACTED_FIRM_DIR/system/system/etc/style_transfer"
 	    rm -rf "$EXTRACTED_FIRM_DIR/system/system/priv-app"/PhotoEditor_*
-        cp -rfa "$(pwd)/QuantumROM/Mods/Apps/PhotoEditor_AIFull/"* "$EXTRACTED_FIRM_DIR"
+        cp -rfa "$(pwd)/OceanTools/Mods/Apps/PhotoEditor_AIFull/"* "$EXTRACTED_FIRM_DIR"
     fi
 
     # Apply custom floating feature.
