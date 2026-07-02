@@ -6,19 +6,19 @@ on:
       STOCK_DEVICE:
         description: "Your Device"
         required: true
-        default: ""
+        default: "SM-A127F"
       TARGET_DEVICE:
         description: "Base Devices"
         required: true
-        default: ""
+        default: "SM-A047F"
       TARGET_DEVICE_CSC:
         description: "Base Devices Region [CSC]"
         required: true
-        default: ""
+        default: "XXV"
       TARGET_DEVICE_IMEI:
         description: "Base Devices IMEI"
         required: true
-        default: ""
+        default: "354048746490649"
       OUTPUT_FILESYSTEM:
         description: "Compress FS : erofs / ext4"
         required: true
