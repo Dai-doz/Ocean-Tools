@@ -30,7 +30,7 @@ on:
 
 jobs:
   build:
-    name: Run QuantumROM Tools OS-15.
+    name: Run Ocean Tools 14.
     runs-on: ubuntu-latest
 
     steps:
