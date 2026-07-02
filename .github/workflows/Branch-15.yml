@@ -6,7 +6,7 @@ on:
       BRANCH:
         description: "Branch"
         required: true
-        default: "fifteen"
+        default: "15"
       STOCK_DEVICE:
         description: "Your Device"
         required: true
