@@ -6,7 +6,7 @@ on:
       RANCH:
         description: "Git branch to use (e.g. fifteen)"
         required: true
-        default: "fifteen"
+        default: "15"
       STOCK_DEVICE:
         description: "Your Device"
         required: true
