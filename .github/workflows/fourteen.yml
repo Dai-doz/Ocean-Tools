@@ -22,7 +22,7 @@ on:
       OUTPUT_FILESYSTEM:
         description: "Compress FS : erofs / ext4"
         required: true
-        default: "erofs"
+        default: "ext4"
       COMPRESS_IMG_TO_XZ:
         description: "Compress ROM ? [False/True]"
         required: true
