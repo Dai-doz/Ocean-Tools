@@ -11,6 +11,8 @@ RELEASE_NAME="${TARGET_DEVICE} Port For ${STOCK_DEVICE}"
 
 echo "Uploading to GoFile..."
 GOFILE_LINK=$(sudo bash upload.sh "$ZIP_PATH")
+echo "🌎 File uploaded here: $GOFILE_LINK"
+
 
 # File info
 FILE_SIZE=$(du -h "$ZIP_PATH" | cut -f1)
