@@ -37,8 +37,15 @@ jobs:
       - name: Checkout repository.
         uses: actions/checkout@v4
 
-      - name: Cleaning junk files
-        uses: rokibhasansagar/slimhub_actions@v25.42.5
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+        tool-cache: true
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
 
       - name: Install Dependencies.
         run: |
