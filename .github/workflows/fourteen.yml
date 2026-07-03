@@ -3,10 +3,6 @@ name: Ocean Tools 14
 on:
   workflow_dispatch:
     inputs:
-      RANCH:
-        description: "Git branch to use (e.g. fifteen)"
-        required: true
-        default: "15"
       STOCK_DEVICE:
         description: "Your Device"
         required: true
@@ -40,8 +36,6 @@ jobs:
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.BRANCH }}
 
       - name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
