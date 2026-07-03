@@ -1,0 +1,44 @@
+name: Ocean Tools 15
+
+on:
+  workflow_dispatch:
+    inputs:
+      BRANCH:
+        description: "Branch"
+        required: true
+        default: "fifteen"
+      STOCK_DEVICE:
+        description: "Your Device"
+        required: true
+        default: "SM-A127F"
+      TARGET_DEVICE:
+        description: "Base Devices"
+        required: true
+        default: "SM-A145F"
+      TARGET_DEVICE_CSC:
+        description: "Base Devices Region [CSC]"
+        required: true
+        default: "XXV"
+      TARGET_DEVICE_IMEI:
+        description: "Base Devices IMEI"
+        required: true
+        default: "350514853640379"
+      OUTPUT_FILESYSTEM:
+        description: "Compress FS : erofs / ext4"
+        required: true
+        default: "erofs"
+      COMPRESS_IMG_TO_XZ:
+        description: "Compress ROM ? [False/True]"
+        required: true
+        default: "True"
+
+jobs:
+  build:
+    name: Starting Ocean Tools 15 Process
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.BRANCH }}
