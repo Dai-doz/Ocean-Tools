@@ -750,15 +750,25 @@ PATCH_BT_LIB() {
 
 
 FIX_VNDK() {
-    echo -e "- Checking $STOCK_DEVICE and $TARGET_DEVICE vndk version."
-    export SDK="$(GET_PROP "$EXTRACTED_FIRM_DIR" "system" ro.system.build.version.sdk_full)"
-	echo -e "- Target rom SDK version: $SDK"
-    if [ -f "$TARGET_ROM_SYSTEM_EXT_DIR/apex/com.android.vndk.v${STOCK_VNDK_VERSION}.apex" ]; then
-        echo -e "- VNDK matched."
+    echo " "
+
+	if [ "$#" -ne 1 ]; then
+        echo -e "Usage: ${FUNCNAME[0]} <EXTRACTED_FIRM_DIRECTORY>"
+        return 1
+    fi
+
+	local EXTRACTED_FIRM_DIR="$1"
+	local TARGET_ROM_SYSTEM_EXT_DIR="$(GET_SYSTEM_EXT_DIR "$EXTRACTED_FIRM_DIR")"
+
+    echo -e "Checking $STOCK_DEVICE and $TARGET_DEVICE vndk version."
+    export SDK="$(GET_PROP "$EXTRACTED_FIRM_DIR" "system" ro.build.version.sdk_full)"
+	echo "- Target rom SDK version: $SDK"
+    if [ -f "${TARGET_ROM_SYSTEM_EXT_DIR}/apex/com.android.vndk.v${STOCK_VNDK_VERSION}.apex" ]; then
+        echo -e "- VNDK matched. ${TARGET_ROM_SYSTEM_EXT_DIR}/apex/com.android.vndk.v${STOCK_VNDK_VERSION}.apex"
     else
         echo -e "- VNDK mismatch. Adding SDK $SDK com.android.vndk.v${STOCK_VNDK_VERSION}.apex"
-        rm -rf "$TARGET_ROM_SYSTEM_EXT_DIR/apex/"*.apex
-        cp -rfa "$VNDKS_COLLECTION/34/$STOCK_VNDK_VERSION/system_ext/"* "$TARGET_ROM_SYSTEM_EXT_DIR/"
+        rm -rf "${TARGET_ROM_SYSTEM_EXT_DIR}/apex/"com.android.vndk.v*.apex
+        7z x "$VNDKS_COLLECTION/34/${STOCK_VNDK_VERSION}.zip" -o"${TARGET_ROM_SYSTEM_EXT_DIR}/" -y >/dev/null 2>&1
     fi
 }
 
