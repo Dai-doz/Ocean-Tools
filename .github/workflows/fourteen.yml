@@ -10,7 +10,7 @@ on:
       TARGET_DEVICE:
         description: "Base Devices"
         required: true
-        default: "SM-A047F"
+        default: "SM-A725F"
       TARGET_DEVICE_CSC:
         description: "Base Devices Region [CSC]"
         required: true
@@ -18,7 +18,7 @@ on:
       TARGET_DEVICE_IMEI:
         description: "Base Devices IMEI"
         required: true
-        default: "354048746490649"
+        default: "357843230273247"
       OUTPUT_FILESYSTEM:
         description: "Compress FS : erofs / ext4"
         required: true
