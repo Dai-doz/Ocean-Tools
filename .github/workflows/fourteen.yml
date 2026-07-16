@@ -11,6 +11,10 @@ on:
         description: "Base Devices"
         required: true
         default: "SM-A725F"
+      TARGET_FW_VERSION:
+        description: "Any specific firmware release version."
+        required: false
+        default: ""
       TARGET_DEVICE_CSC:
         description: "Base Devices Region [CSC]"
         required: true
