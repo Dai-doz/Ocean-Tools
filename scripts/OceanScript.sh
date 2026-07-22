@@ -99,6 +99,7 @@ DOWNLOAD_FIRMWARE() {
     local CSC="$2"
     local IMEI="$3"
     local DOWN_DIR="${4}/$MODEL"
+    local CUSTOM_VERSION="$5" 
 
     rm -rf "$DOWN_DIR"
     mkdir -p "$DOWN_DIR"
@@ -108,12 +109,19 @@ DOWNLOAD_FIRMWARE() {
     echo -e "======================================"
     echo -e "MODEL: $MODEL | CSC: $CSC"
 
-    VERSION=$(python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" checkupdate 2>&1)
+ 
+    if [ -n "$CUSTOM_VERSION" ]; then
+        echo -e "📌 Using custom requested version: $CUSTOM_VERSION"
+        VERSION="$CUSTOM_VERSION"
+    else
+        echo -e "🔍 Checking for latest update..."
+        VERSION=$(python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" checkupdate 2>&1)
 
-    if [ $? -ne 0 ] || [ -z "$VERSION" ]; then
-        echo -e "⛔️ MODEL/CSC/IMEI not valid or no update found."
-        echo -e "Error: $VERSION"
-        return 1
+        if [ $? -ne 0 ] || [ -z "$VERSION" ]; then
+            echo -e "⛔️ MODEL/CSC/IMEI not valid or no update found."
+            echo -e "Error: $VERSION"
+            return 1
+        fi
     fi
 
     if [ -n "$GITHUB_ENV" ]; then
@@ -123,12 +131,12 @@ DOWNLOAD_FIRMWARE() {
     # --- Step 2: Download Firmware ---
     python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" download -v "$VERSION" -O "$DOWN_DIR"
     if [ $? -ne 0 ]; then
-        echo -e "⛔️ Download failed. Check IMEI/MODEL/CSC."
+        echo -e "⛔️ Download failed. Check IMEI/MODEL/CSC/VERSION."
         exit 1
     fi
 
-	find "$DOWN_DIR" -type f -name "*.zip.enc*" -delete
-
+    find "$DOWN_DIR" -type f -name "*.zip.enc*" -delete
+}
     # --- Show Firmware Info ---
     local file_size=$(du -m "${DOWN_DIR}"/${MODEL}_*_fac.zip 2>/dev/null | cut -f1)
     echo -e "Firmware Size: ${file_size} MB"
