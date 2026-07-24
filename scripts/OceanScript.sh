@@ -210,7 +210,7 @@ EXTRACT_FIRMWARE() {
     echo " "
 
     if [ "$#" -ne 1 ]; then
-        echo -e "Usage: ${FW[0]} <FIRMWARE_DIRECTORY>"
+        echo -e "Usage: ${FUNCNAME[0]} <FIRMWARE_DIRECTORY>"
         return 1
     fi
 
