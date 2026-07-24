@@ -162,7 +162,7 @@ DOWNLOAD_FIRMWARE() {
     local MODEL="$1"
     local CSC="$2"
     local IMEI="$3"
-    local DOWN_DIR="${4}/$MODEL"
+    local DOWN_DIR="FW/$MODEL"
     local CUSTOM_VERSION="$5" 
 
     rm -rf "$DOWN_DIR"
