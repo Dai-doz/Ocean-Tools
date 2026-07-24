@@ -68,7 +68,7 @@ jobs:
       - name: Extract firmware
         run: |
           source scripts/OceanScript.sh
-          EXTRACT_FIRMWARE "FIRMWARE/${{ github.event.inputs.TARGET_DEVICE }}"
+          EXTRACT_FIRMWARE " FW/${{ github.event.inputs.TARGET_DEVICE }}"
 
       - name: Start Rom Build For ${{ github.event.inputs.STOCK_DEVICE }}
         run: |
